@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Level 2 — Variables & Types | C# Quest</title>
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-icon">&lt;/&gt;</span>
+      <span class="brand-name">C# Quest</span>
+    </div>
+    <div class="hud">
+      <button class="btn-toggle" id="teacherToggle" title="Show teacher notes">
+        <span class="dot-led"></span><span class="label">Teacher: OFF</span>
+      </button>
+      <a href="../index.html" class="btn-ghost">&larr; Map</a>
+    </div>
+  </header>
+
+  <main class="lesson-main">
+    <div class="lesson-header">
+      <div class="lesson-crumb"><a href="../index.html">Map</a> &rsaquo; Level 02</div>
+      <h1>Variables &amp; Types</h1>
+      <p class="tagline">Store data in named boxes the computer can remember.</p>
+    </div>
+
+    <section class="lesson-section">
+      <h2><span class="icon">i</span> What you'll learn</h2>
+      <ul>
+        <li>What a variable is and why we use them.</li>
+        <li>The four most-common types: <code>int</code>, <code>string</code>, <code>bool</code>, <code>double</code>.</li>
+        <li>How C# checks types at compile time (strong typing).</li>
+        <li>The difference between <code>int</code> and <code>double</code>.</li>
+      </ul>
+
+      <div class="teacher-only">
+        <div class="teacher-note">
+          <h4>Lesson plan (≈ 20 min)</h4>
+          <ul>
+            <li><strong>3 min</strong> — Warm-up: open Level 2 in VS Code, look at <code>Variables.cs</code> together.</li>
+            <li><strong>5 min</strong> — Concept + analogy + the type table.</li>
+            <li><strong>8 min</strong> — Fill in the 5 TODOs together. After each, run <code>dotnet run</code> so they <em>see</em> the value.</li>
+            <li><strong>4 min</strong> — Run <code>dotnet test</code>, take the quiz.</li>
+          </ul>
+          <h4>Warm-up question</h4>
+          <p class="say">"If I asked you to remember my age, where would you write it down so you can look it up later?"</p>
+          <p>A variable is exactly that "place where you write it down."</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2><span class="icon">1</span> The concept</h2>
+      <p>A <strong>variable</strong> is a named storage spot for a value. You declare it once, then use the name as a stand-in for the value everywhere else.</p>
+      <p class="dim"><strong>Real-world analogy:</strong> A variable is a labeled jar in your kitchen. The label says <em>sugar</em>. Whatever you put inside, the label still says <em>sugar</em>. In C#, the label also remembers what kind of thing is allowed inside &mdash; sugar only, not salt.</p>
+<pre class="code-block"><span class="tok-type">int</span> age = <span class="tok-num">25</span>;
+<span class="tok-type">string</span> name = <span class="tok-str">"Sam"</span>;
+<span class="tok-type">bool</span> isStudent = <span class="tok-key">true</span>;
+<span class="tok-type">double</span> price = <span class="tok-num">19.99</span>;
+
+<span class="tok-type">Console</span>.<span class="tok-key">WriteLine</span>(<span class="tok-str">$"Hello {name}, you are {age}."</span>);</pre>
+      <p>Read the shape: <code>type name = value;</code> &mdash; that pattern never changes.</p>
+
+      <div class="teacher-only">
+        <div class="teacher-note">
+          <h4>Drill the pattern</h4>
+          <p>Cover the screen and ask them to say the pattern out loud: <strong>"type, name, equals, value, semicolon."</strong> Make them repeat it 3 times. It's the rhythm they'll use for thousands of lines of code.</p>
+          <h4>Ask</h4>
+          <p class="say">"In <code>int age = 25;</code> which part is the <em>name</em>, and which part is the <em>value</em>?"</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2><span class="icon">2</span> The four core types</h2>
+      <ul>
+        <li><code>int</code> &mdash; whole numbers like 0, 42, -7. No decimals.</li>
+        <li><code>double</code> &mdash; numbers with decimals: 3.14, -0.5, 19.99.</li>
+        <li><code>string</code> &mdash; text in double quotes: <code>"hello"</code>.</li>
+        <li><code>bool</code> &mdash; <code>true</code> or <code>false</code>. Just those two.</li>
+      </ul>
+      <div class="callout warn">
+        <strong>Watch out:</strong> <code>int age = 25.5;</code> will not compile. <code>25.5</code> is a <code>double</code>, and C# refuses to silently lose the <code>.5</code>. Strong typing protects you.
+      </div>
+      <div class="callout">
+        <strong>String interpolation:</strong> A string starting with <code>$</code> lets you drop variables in with <code>{ }</code> braces. <br>
+        <code>$"Hello {name}"</code> &rarr; <code>"Hello Sam"</code>.
+      </div>
+      <div class="interview">
+        <strong>Interview answer:</strong> "C# is statically and strongly typed: every variable has a type known at compile time, and the compiler rejects assignments between incompatible types unless you explicitly cast. This catches bugs before runtime."
+      </div>
+
+      <div class="teacher-only">
+        <div class="teacher-note">
+          <h4>Hammer the difference: int vs double</h4>
+          <p>Have the student type <code>int x = 25.5;</code> in the editor on purpose. Show them the red squiggle. <em>Read the error message together.</em> Reading compiler errors is a skill, not a punishment.</p>
+          <h4>Common mistakes</h4>
+          <ul>
+            <li>Forgetting double quotes around a string &rarr; "name does not exist in the current context."</li>
+            <li>Using single quotes for a string &rarr; "Too many characters in character literal."</li>
+            <li>Storing a number in a string variable — works but means math won't work later. Worth flagging.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2><span class="icon">3</span> <code>var</code> &mdash; let the compiler decide</h2>
+      <p>You can write <code>var</code> instead of the type. The compiler picks the right type from the value on the right:</p>
+<pre class="code-block"><span class="tok-key">var</span> age = <span class="tok-num">25</span>;          <span class="tok-com">// int</span>
+<span class="tok-key">var</span> name = <span class="tok-str">"Sam"</span>;       <span class="tok-com">// string</span>
+<span class="tok-key">var</span> isOk = <span class="tok-key">true</span>;        <span class="tok-com">// bool</span></pre>
+      <p>It is still strongly typed &mdash; <code>var</code> is just shorter syntax. <code>age = "hi";</code> after this would still fail.</p>
+
+      <div class="teacher-only">
+        <div class="teacher-note">
+          <h4>When to introduce <code>var</code></h4>
+          <p>For the first 2&ndash;3 levels, ask them to write the explicit type (<code>int</code>, <code>string</code>). Seeing the type forces them to think about it. <code>var</code> is a great shortcut <em>once they think in types</em>, not before.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2><span class="icon">&gt;</span> Console challenge</h2>
+      <p>Open this folder in VS Code:</p>
+      <p><span class="path-pill">practice-console/Level02-Variables/</span></p>
+      <ol class="challenge-steps">
+        <li>Open <code>Level02/Variables.cs</code>. You'll see 4 methods with <code>TODO</code> markers.</li>
+        <li>Fill each method so it returns the value the comments ask for.</li>
+        <li>Run <code>dotnet run</code> inside <code>Level02/</code> to see your values printed.</li>
+        <li>Run <code>dotnet test</code> from the level folder. All tests should pass.</li>
+      </ol>
+      <div class="callout tip">
+        <strong>Tip:</strong> Read the method's return type carefully. <code>int</code> means return a whole number, <code>string</code> means return text in double quotes.
+      </div>
+
+      <div class="teacher-only">
+        <div class="teacher-note">
+          <h4>Work the TODOs in order</h4>
+          <p>Do TODO #1 together while explaining. Then let the student attempt TODO #2 alone — guide only when stuck. Predict-run-verify after every change.</p>
+          <h4>The string interpolation TODO (#5)</h4>
+          <p>If they struggle, write the template first with placeholders: <code>$"Hello __, you are __."</code> Then fill the blanks together. The shape comes first; the variables come second.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2><span class="icon">?</span> Quiz</h2>
+      <p class="dim">All correct unlocks Level 3.</p>
+      <div class="quiz" id="quizRoot"></div>
+
+      <label class="honor-row" id="honorRow" for="honorBox">
+        <input type="checkbox" id="honorBox" />
+        <span class="honor-label">
+          I ran <code>dotnet test</code> in the Level 2 folder and all 6 tests passed.
+        </span>
+      </label>
+
+      <div class="quiz-actions">
+        <button class="btn btn-secondary" id="checkQuizBtn">Check answers</button>
+        <button class="btn" id="completeBtn" disabled>Mark Level Complete</button>
+        <span class="quiz-status" id="quizStatus"></span>
+      </div>
+    </section>
+
+    <nav class="lesson-nav">
+      <a href="level-01.html" class="btn btn-secondary">&larr; Level 1</a>
+      <a href="../index.html" class="btn btn-secondary">Back to map</a>
+    </nav>
+  </main>
+
+  <script src="../assets/js/progress.js"></script>
+  <script src="../assets/js/quiz.js"></script>
+  <script>
+    initLesson({
+      levelId: 2,
+      quiz: [
+        {
+          question: 'Which type is the right choice for the price 19.99?',
+          options: ['int', 'string', 'double', 'bool'],
+          answer: 2,
+        },
+        {
+          question: 'Which line correctly declares a variable that holds a person\'s name?',
+          options: [
+            'int name = "Sam";',
+            'string name = "Sam";',
+            'string name = Sam;',
+            'name string = "Sam";',
+          ],
+          answer: 1,
+        },
+        {
+          question: 'What does $"Hello {name}" do when name is "Sam"?',
+          options: [
+            'Prints the literal text Hello {name}',
+            'Causes a compile error — that is not valid C#',
+            'Produces the string "Hello Sam" via string interpolation',
+            'Calls a method named name',
+          ],
+          answer: 2,
+        },
+        {
+          question: 'Why does int age = 25.5; fail to compile?',
+          options: [
+            'Numbers cannot have decimals in C#',
+            '25.5 is a double and C# will not silently shrink it into an int',
+            'The variable is named age, which is reserved',
+            'You must use var, never int',
+          ],
+          answer: 1,
+        },
+      ],
+    });
+  </script>
+</body>
+</html>

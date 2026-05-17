@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Level 1 — Hello World | C# Quest</title>
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-icon">&lt;/&gt;</span>
+      <span class="brand-name">C# Quest</span>
+    </div>
+    <div class="hud">
+      <button class="btn-toggle" id="teacherToggle" title="Show teacher notes">
+        <span class="dot-led"></span><span class="label">Teacher: OFF</span>
+      </button>
+      <a href="../index.html" class="btn-ghost">&larr; Map</a>
+    </div>
+  </header>
+
+  <main class="lesson-main">
+    <div class="lesson-header">
+      <div class="lesson-crumb"><a href="../index.html">Map</a> &rsaquo; Level 01</div>
+      <h1>Hello, World!</h1>
+      <p class="tagline">Run your very first C# program and print text to the screen.</p>
+    </div>
+
+    <section class="lesson-section">
+      <h2><span class="icon">i</span> What you'll learn</h2>
+      <ul>
+        <li>What a C# program looks like.</li>
+        <li>What <code>Console.WriteLine</code> does.</li>
+        <li>How to run code with <code>dotnet run</code>.</li>
+      </ul>
+
+      <div class="teacher-only">
+        <div class="teacher-note">
+          <h4>Lesson plan (≈ 15 min)</h4>
+          <ul>
+            <li><strong>2 min</strong> — Open VS Code on the Level 1 folder side-by-side with this page.</li>
+            <li><strong>5 min</strong> — Walk through the concept + the line break-down together.</li>
+            <li><strong>5 min</strong> — Student types <code>Console.WriteLine("Hello, World!");</code> and runs <code>dotnet run</code>.</li>
+            <li><strong>3 min</strong> — Run <code>dotnet test</code> together. Then take the quiz.</li>
+          </ul>
+          <h4>Before you start, ask</h4>
+          <p class="say">"When you open an app on your phone, what is the very first thing the computer has to do?"</p>
+          <p>Goal of the question: get them to say "follow instructions one by one." That's literally what a program is.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2><span class="icon">1</span> The concept</h2>
+      <p>A C# program is a set of instructions the computer follows in order. The simplest instruction is: <em>show some text on the screen</em>.</p>
+      <p class="dim"><strong>Real-world analogy:</strong> Think of <code>Console.WriteLine("Hello")</code> as you handing a sticky note that says "Hello" to a friend and asking them to read it out loud. <code>Console</code> is the friend. <code>WriteLine</code> is the action. The text in quotes is the note.</p>
+      <p>Here is the smallest C# program possible (.NET 8 style):</p>
+<pre class="code-block"><span class="tok-com">// Program.cs</span>
+<span class="tok-type">Console</span>.<span class="tok-key">WriteLine</span>(<span class="tok-str">"Hello, World!"</span>);</pre>
+      <p>That's the entire file. .NET 8 lets you skip the boilerplate <code>class</code> and <code>Main</code> — this is called <strong>top-level statements</strong>.</p>
+      <div class="callout">
+        <strong>Why this matters:</strong> Every app you'll ever build starts with running <em>some</em> first instruction. Today that instruction is "print a string." Next week it could be "start a web server."
+      </div>
+
+      <div class="teacher-only">
+        <div class="teacher-note">
+          <h4>Talk through it</h4>
+          <ul>
+            <li>Read the one line of code <em>out loud</em>, left to right: "Console — dot — WriteLine — open paren — quote — Hello, World — quote — close paren — semicolon."</li>
+            <li>Make sure they hear the structure: a thing (<code>Console</code>), a verb (<code>WriteLine</code>), an argument (the string), a terminator (the semicolon).</li>
+          </ul>
+          <h4>Check understanding — ask</h4>
+          <p class="say">"What would happen if I forgot the semicolon at the end?"</p>
+          <p>If they don't know, that's fine — let them try it in the next step and see the error.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2><span class="icon">2</span> Break it down</h2>
+      <p>Let's read the one line you'll write, piece by piece:</p>
+      <ul>
+        <li><code>Console</code> &mdash; a built-in object that represents the terminal window.</li>
+        <li><code>.WriteLine(...)</code> &mdash; a method (function) that writes text <em>and</em> moves to the next line.</li>
+        <li><code>"Hello, World!"</code> &mdash; a <strong>string</strong>: text wrapped in double quotes.</li>
+        <li><code>;</code> &mdash; every C# statement ends with a semicolon. Forget it and the compiler complains.</li>
+      </ul>
+      <div class="callout warn">
+        <strong>Watch out:</strong> C# is case-sensitive. <code>console.writeline</code> will not compile. Capital <code>C</code>, capital <code>W</code>, capital <code>L</code>.
+      </div>
+      <div class="interview">
+        <strong>Interview answer:</strong> "In .NET 8, top-level statements let a console app skip the explicit <code>Main</code> method &mdash; the compiler generates it for you. <code>Console.WriteLine</code> writes a line to standard output."
+      </div>
+
+      <div class="teacher-only">
+        <div class="teacher-note">
+          <h4>Common student mistakes — watch for</h4>
+          <ul>
+            <li>Lowercase <code>console.writeline</code> — case matters; "case-sensitive" is a real concept worth naming out loud.</li>
+            <li>Single quotes <code>'Hello'</code> — in C#, single quotes are for a single character (<code>char</code>), not a string.</li>
+            <li>Missing the semicolon — show the compile error rather than fixing it for them.</li>
+            <li>Smart quotes from auto-correct (<code>“ ”</code>) — happens if they paste from chat or docs.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2><span class="icon">&gt;</span> Console challenge</h2>
+      <p>Time to write real code. Open this folder in VS Code:</p>
+      <p><span class="path-pill">practice-console/Level01-HelloWorld/</span></p>
+      <ol class="challenge-steps">
+        <li>Open the folder in VS Code.</li>
+        <li>Open <code>Level01/Program.cs</code>. You'll see a <code>TODO</code> comment.</li>
+        <li>Replace the <code>TODO</code> with a line that prints <code>Hello, World!</code> exactly.</li>
+        <li>Open a terminal in that folder and run:
+<pre class="code-block">cd Level01
+dotnet run</pre>
+          You should see your message printed.
+        </li>
+        <li>Now prove your code is correct &mdash; from the parent folder run:
+<pre class="code-block">dotnet test</pre>
+          All tests should be green.
+        </li>
+      </ol>
+      <div class="callout tip">
+        <strong>Tip:</strong> If <code>dotnet</code> is not found, install the .NET 8 SDK from <a href="https://dotnet.microsoft.com/download" target="_blank">dotnet.microsoft.com/download</a> and restart your terminal.
+      </div>
+
+      <div class="teacher-only">
+        <div class="teacher-note">
+          <h4>Make it stick</h4>
+          <ul>
+            <li>Before they hit Enter on <code>dotnet run</code>, ask: "what do you expect to see?" Predicting first builds the mental model.</li>
+            <li>After it works, ask them to change the message to their name. Then run again. Tiny wins keep momentum.</li>
+            <li>Now run <code>dotnet test</code> together — explain that tests are "small robots that check your work."</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2><span class="icon">?</span> Quiz</h2>
+      <p class="dim">Get all questions right to unlock Level 2.</p>
+      <div class="quiz" id="quizRoot"></div>
+
+      <label class="honor-row" id="honorRow" for="honorBox">
+        <input type="checkbox" id="honorBox" />
+        <span class="honor-label">
+          I ran <code>dotnet test</code> in the Level 1 folder and all tests passed.
+        </span>
+      </label>
+
+      <div class="quiz-actions">
+        <button class="btn btn-secondary" id="checkQuizBtn">Check answers</button>
+        <button class="btn" id="completeBtn" disabled>Mark Level Complete</button>
+        <span class="quiz-status" id="quizStatus"></span>
+      </div>
+    </section>
+
+    <nav class="lesson-nav">
+      <a href="../index.html" class="btn btn-secondary">&larr; Back to map</a>
+      <a href="level-02.html" class="btn btn-secondary">Level 2 &rarr;</a>
+    </nav>
+  </main>
+
+  <script src="../assets/js/progress.js"></script>
+  <script src="../assets/js/quiz.js"></script>
+  <script>
+    initLesson({
+      levelId: 1,
+      quiz: [
+        {
+          question: 'Which line prints text to the console in C#?',
+          options: [
+            'console.print("Hi")',
+            'Console.WriteLine("Hi");',
+            'print("Hi")',
+            'System.out.println("Hi");',
+          ],
+          answer: 1,
+        },
+        {
+          question: 'What ends every C# statement?',
+          options: [
+            'A period .',
+            'A newline',
+            'A semicolon ;',
+            'A comma ,',
+          ],
+          answer: 2,
+        },
+        {
+          question: 'In .NET 8, why can a console program work without writing a class and Main method?',
+          options: [
+            'C# does not need a Main method anymore — ever.',
+            'Top-level statements let the compiler generate Main for you.',
+            'The runtime guesses the entry point at random.',
+            'You must always write a Main method; the docs are wrong.',
+          ],
+          answer: 1,
+        },
+        {
+          question: 'C# identifiers like Console are...',
+          options: [
+            'Case-insensitive — console works too.',
+            'Case-sensitive — Console and console are different.',
+            'Always lowercase by rule.',
+            'Allowed to start with a digit.',
+          ],
+          answer: 1,
+        },
+      ],
+    });
+  </script>
+</body>
+</html>

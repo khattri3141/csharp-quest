@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C# Quest — Learn C# the Fun Way</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body class="map-page">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-icon">&lt;/&gt;</span>
+      <span class="brand-name">C# Quest</span>
+    </div>
+    <div class="hud">
+      <div class="hud-item">
+        <span class="hud-label">XP</span>
+        <div class="xp-bar"><div class="xp-fill" id="xpFill"></div></div>
+        <span class="hud-value" id="xpValue">0 / 1200</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">Badges</span>
+        <span class="hud-value" id="badgeCount">0</span>
+      </div>
+      <button class="btn-toggle" id="teacherToggle" title="Show teacher notes inside lessons">
+        <span class="dot-led"></span><span class="label">Teacher: OFF</span>
+      </button>
+      <button class="btn-ghost" id="resetBtn" title="Reset all progress">Reset</button>
+    </div>
+  </header>
+
+  <main class="map-main">
+    <section class="hero">
+      <h1>Your Quest</h1>
+      <p>Complete each level. Read the theory, pass the quiz, beat the console challenge. Unlock the next level.</p>
+    </section>
+
+    <div class="level-map" id="levelMap">
+      <!-- Levels rendered by JS -->
+    </div>
+
+    <section class="legend">
+      <span><i class="dot done"></i> Complete</span>
+      <span><i class="dot current"></i> Unlocked</span>
+      <span><i class="dot locked"></i> Locked</span>
+    </section>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="assets/js/progress.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
