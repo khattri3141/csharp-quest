@@ -7,4 +7,4 @@
 // To run: type   dotnet run   in this folder.
 // =======================================================
 
-Level01.HelloProgram.Run();
+Level01.HelloProgram.Binod();

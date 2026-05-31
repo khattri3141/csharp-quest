@@ -4,7 +4,7 @@ namespace Level01;
 // The tests in Level01.Tests will call Run() and check what it prints.
 public static class HelloProgram
 {
-    public static void Run()
+    public static void Binod()
     {
         // =================================================
         // YOUR JOB:
@@ -15,6 +15,6 @@ public static class HelloProgram
         //
         //   Capital H, capital W. No quotes, no extra text.
         // =================================================
-        Console.WriteLine("TODO: write your first line of C# here");
+        Console.WriteLine("hello beautiful lady japanese gir  ");
     }
 }
