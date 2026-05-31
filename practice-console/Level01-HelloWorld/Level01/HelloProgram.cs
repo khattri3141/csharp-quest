@@ -15,6 +15,6 @@ public static class HelloProgram
         //
         //   Capital H, capital W. No quotes, no extra text.
         // =================================================
-        Console.WriteLine("TODO: write your first line of C# here");
+        Console.WriteLine("wellcome to the world of programming");
     }
 }
