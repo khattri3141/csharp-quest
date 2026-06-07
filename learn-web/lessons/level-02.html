@@ -55,7 +55,10 @@
     <section class="lesson-section">
       <h2><span class="icon">1</span> The concept</h2>
       <p>A <strong>variable</strong> is a named storage spot for a value. You declare it once, then use the name as a stand-in for the value everywhere else.</p>
-      <p class="dim"><strong>Real-world analogy:</strong> A variable is a labeled jar in your kitchen. The label says <em>sugar</em>. Whatever you put inside, the label still says <em>sugar</em>. In C#, the label also remembers what kind of thing is allowed inside &mdash; sugar only, not salt.</p>
+      <div class="callout">
+        <strong>Memory Palace — Station 2: The Locker Room.</strong> Walk past the PA speaker from Station 1 and through the swinging door into the <strong>locker room</strong>. Rows of metal lockers, each with a label slot at the top: <code>age</code>, <code>name</code>, <code>isStudent</code>, <code>price</code>. You can open a locker, put exactly one item inside, and the label stays the same. Hear the clang of the metal door. <br><br>
+        <em>Bind it:</em> the <strong>label</strong> = the variable name. The <strong>item inside</strong> = the value. The <strong>size and shape of the locker</strong> = the type — a tall narrow locker only fits a number (<code>int</code>), a wide one fits a long sentence (<code>string</code>), a tiny one fits one toggle switch (<code>bool</code>). Try to shove a shoe into the toggle-switch locker and the gym manager (the compiler) stops you at the door.
+      </div>
 <pre class="code-block"><span class="tok-type">int</span> age = <span class="tok-num">25</span>;
 <span class="tok-type">string</span> name = <span class="tok-str">"Sam"</span>;
 <span class="tok-type">bool</span> isStudent = <span class="tok-key">true</span>;

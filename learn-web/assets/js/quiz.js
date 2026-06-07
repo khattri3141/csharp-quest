@@ -4,7 +4,7 @@ function applyTeacherModeBody() {
   document.body.classList.toggle('teacher-mode', Progress.teacherMode());
 }
 
-function bindTeacherToggle() {
+function bindTeacherToggle(onChange) {
   const btn = document.getElementById('teacherToggle');
   if (!btn) return;
   const refresh = () => {
@@ -17,12 +17,16 @@ function bindTeacherToggle() {
   btn.addEventListener('click', () => {
     Progress.setTeacherMode(!Progress.teacherMode());
     refresh();
+    if (typeof onChange === 'function') onChange();
   });
 }
 
 function initLesson(config) {
   const { levelId, quiz } = config;
-  bindTeacherToggle();
+  bindTeacherToggle(() => {
+    applyQuizVisibility();
+    refreshCompleteButton();
+  });
   applyTeacherModeBody();
 
   // Render quiz
@@ -60,9 +64,28 @@ function initLesson(config) {
   let quizPassed = false;
   let honorChecked = false;
 
+  function completeButtonLabel(teacher) {
+    if (Progress.isComplete(levelId)) return 'Already Complete ✓';
+    if (teacher) return 'Mark Level Complete (Teacher)';
+    return 'Mark Level Complete';
+  }
+
+  function applyQuizVisibility() {
+    const teacher = Progress.teacherMode();
+    const display = teacher ? 'none' : '';
+    [quizRoot, honorRow, checkBtn, statusEl].forEach(el => {
+      if (el) el.style.display = display;
+    });
+    if (completeBtn) completeBtn.textContent = completeButtonLabel(teacher);
+  }
+
   function refreshCompleteButton() {
     if (!completeBtn) return;
     if (Progress.isComplete(levelId)) {
+      completeBtn.disabled = false;
+      return;
+    }
+    if (Progress.teacherMode()) {
       completeBtn.disabled = false;
       return;
     }
@@ -116,9 +139,7 @@ function initLesson(config) {
   }
 
   if (completeBtn) {
-    if (Progress.isComplete(levelId)) {
-      completeBtn.textContent = 'Already Complete ✓';
-    }
+    applyQuizVisibility();
     refreshCompleteButton();
     completeBtn.addEventListener('click', () => {
       if (!Progress.isComplete(levelId) && !(quizPassed && honorChecked)) {
