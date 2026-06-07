@@ -176,6 +176,29 @@ code, pre { font-family: 'Cascadia Code', 'Consolas', 'Courier New', monospace; 
 .callout.tip strong { color: var(--good); }
 .callout.warn strong { color: var(--warn); }
 
+.type-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-size: 14px;
+}
+
+.type-table th,
+.type-table td {
+  border: 1px solid var(--line);
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.type-table thead th {
+  background: rgba(34, 211, 238, 0.1);
+  color: var(--accent-2);
+  font-weight: 600;
+}
+
+.type-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
 pre.code-block {
   background: #060912; border: 1px solid var(--line);
   border-radius: 10px; padding: 14px 16px; overflow-x: auto;

@@ -34,6 +34,8 @@
         <li>The four most-common types: <code>int</code>, <code>string</code>, <code>bool</code>, <code>double</code>.</li>
         <li>How C# checks types at compile time (strong typing).</li>
         <li>The difference between <code>int</code> and <code>double</code>.</li>
+        <li>What <strong>strong typing</strong> actually means and why it helps.</li>
+        <li>What <strong>compiled</strong> means vs an <strong>interpreter</strong>.</li>
       </ul>
 
       <div class="teacher-only">
@@ -111,7 +113,139 @@
     </section>
 
     <section class="lesson-section">
-      <h2><span class="icon">3</span> <code>var</code> &mdash; let the compiler decide</h2>
+      <h2><span class="icon">3</span> Strong typing, compiled &amp; interpreted</h2>
+      
+      <h3>What is strong typing?</h3>
+      <p>
+        <strong>Strong typing</strong> means every variable has a fixed type, and the language
+        <em>enforces the rules about that type</em>. If you declare a variable as <code>int</code>,
+        it can only ever hold whole numbers. The language will never secretly convert it to
+        something else behind your back.
+      </p>
+      <div class="callout">
+        <strong>Analogy — the labelled box:</strong> imagine you have a box labelled
+        <em>"whole numbers only"</em>. A strongly typed language is the strict rule that says
+        you cannot put a letter or a decimal in that box — not now, not ever. A weakly typed
+        language would let you sneak a decimal in and silently round it, which causes bugs that
+        are very hard to find.
+      </div>
+      <p>C# is <strong>statically and strongly typed</strong>:</p>
+      <ul>
+        <li><strong>Statically</strong> — the type of every variable is decided at <em>compile time</em> (before the program
+          runs).</li>
+        <li><strong>Strongly</strong> — the compiler refuses to silently convert between incompatible types. You must be
+          explicit.</li>
+      </ul>
+      <pre
+        class="code-block"><span class="tok-type">int</span> score = <span class="tok-num">100</span>;
+      score = <span class="tok-str">"hello"</span>;   <span class="tok-com">// ❌ compiler error — cannot assign string to int</span></pre>
+      
+      <h3>What does "compiled" mean?</h3>
+      <p>
+        When you write C# code, the computer cannot run it directly — it is just text.
+        <strong>Compiling</strong> is the step that translates your human-readable code into
+        instructions the computer can execute. Think of it as a translator finishing
+        the whole book before anyone reads it.
+      </p>
+      <div class="callout">
+        <strong>Analogy — the book translator:</strong> you write a novel in English.
+        A compiler is a translator who reads the <em>entire</em> novel first, checks for
+        grammar errors, and produces a finished version in the target language.
+        Only after the full translation is complete does the reader (the computer) get the book.
+        If there is an error on page 47, the translator stops and tells you <em>before</em>
+        any reader ever sees a single word.
+      </div>
+      <p>
+        In .NET, C# is compiled to an intermediate language called <strong>IL (Intermediate Language)</strong>.
+        When you run the program, the .NET runtime uses a <strong>JIT (Just-In-Time)</strong> compiler
+        to turn IL into the actual machine code for your CPU. You do not need to memorise this —
+        just know that compilation happens before runtime, so errors are caught early.
+      </p>
+      <pre class="code-block"><span class="tok-com">// You type this (C# source code)</span>
+      <span class="tok-type">int</span> age = <span class="tok-num">25</span>;
+      
+      <span class="tok-com">// dotnet build compiles it</span>
+      <span class="tok-com">// → IL code (inside the .dll file)</span>
+      <span class="tok-com">// → machine code at runtime (JIT)</span></pre>
+      
+      <h3>What is an interpreter?</h3>
+      <p>
+        An <strong>interpreter</strong> is the opposite approach: instead of translating the
+        whole program first, it reads and executes your code <em>one line at a time</em>,
+        right now, while the program is running.
+      </p>
+      <div class="callout">
+        <strong>Analogy — the live interpreter:</strong> now imagine a live human interpreter
+        at a conference who whispers a translation into your ear, sentence by sentence, as the
+        speaker talks. Fast to start, but any grammar mistake only becomes obvious the moment
+        that sentence is spoken — possibly in the middle of your live presentation.
+      </div>
+      <p>Examples of interpreted languages: <strong>Python</strong>, <strong>JavaScript</strong> (in the browser),
+        <strong>Ruby</strong>.</p>
+      
+      <table class="type-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Compiled (C#, C++)</th>
+            <th>Interpreted (Python, JS)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>When is it translated?</td>
+            <td>Before the program runs</td>
+            <td>While the program runs</td>
+          </tr>
+          <tr>
+            <td>When are errors found?</td>
+            <td>At compile time (before running)</td>
+            <td>At runtime (while running)</td>
+          </tr>
+          <tr>
+            <td>Speed</td>
+            <td>Usually faster</td>
+            <td>Usually slower</td>
+          </tr>
+          <tr>
+            <td>Type checking</td>
+            <td>Static — checked before running</td>
+            <td>Dynamic — checked while running</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div class="callout warn">
+        <strong>Why does this matter for you?</strong> When you see a <em>red squiggle</em> in
+        VS Code before you even run your program, that is the <strong>compiler</strong> catching
+        a type error. In Python or JavaScript, that same mistake would only blow up at runtime —
+        possibly after you ship to users.
+      </div>
+      
+      <div class="interview">
+        <strong>Interview answer:</strong> "C# is a compiled, statically typed language. All
+        type errors are caught at compile time, before the program runs. An interpreter would
+        execute code line by line at runtime, which means type errors appear later. C#'s
+        compiled model makes bugs cheaper to find and fix."
+      </div>
+      
+      <div class="teacher-only">
+        <div class="teacher-note">
+          <h4>How to explain this live</h4>
+          <p>Open <code>Variables.cs</code> and intentionally type <code>int x = "hello";</code>. Point to the red squiggle
+            <em>before pressing F5</em>. Say: "That red line is the compiler. The program hasn't started yet. The mistake is
+            already found."</p>
+          <p>Then switch to a Python REPL and assign a number to a string variable. Show that Python only complains when that
+            line actually runs. Ask: "Which would you rather have?"</p>
+          <h4>Key phrase to have them repeat</h4>
+          <p class="say">"Strong typing means the compiler knows the type of every variable before the program runs, and will
+            not let me mix them up."</p>
+        </div>
+      </div>
+      </section>
+      
+      <section class="lesson-section">
+        <h2><span class="icon">4</span> <code>var</code> &mdash; let the compiler decide</h2>
       <p>You can write <code>var</code> instead of the type. The compiler picks the right type from the value on the right:</p>
 <pre class="code-block"><span class="tok-key">var</span> age = <span class="tok-num">25</span>;          <span class="tok-com">// int</span>
 <span class="tok-key">var</span> name = <span class="tok-str">"Sam"</span>;       <span class="tok-com">// string</span>
