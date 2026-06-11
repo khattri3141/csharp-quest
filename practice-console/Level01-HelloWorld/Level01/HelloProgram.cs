@@ -4,7 +4,7 @@ namespace Level01;
 // The tests in Level01.Tests will call Run() and check what it prints.
 public static class HelloProgram
 {
-    public static void Run()
+    public static void Binod()
     {
         //C:\Users\g.khattri\personal-project\csharp-quest\practice-console/Level01-HelloWorld/Level01\HelloProgram.cs
         // =================================================
