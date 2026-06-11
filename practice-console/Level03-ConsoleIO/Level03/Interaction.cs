@@ -19,7 +19,8 @@ public static class Interaction
     // Hint: use a $-prefixed string with {name} in braces.
     public static string Greet(string name)
     {
-        return ""; // change me
+        return $"Hello, {name}! Welcome to C# Quest.";
+        // hello, babinash! welcome to c# quest.
     }
 
     // TODO #2

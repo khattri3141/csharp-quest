@@ -142,7 +142,7 @@ function initLesson(config) {
     applyQuizVisibility();
     refreshCompleteButton();
     completeBtn.addEventListener('click', () => {
-      if (!Progress.isComplete(levelId) && !(quizPassed && honorChecked)) {
+      if (!Progress.isComplete(levelId) && !Progress.teacherMode() && !(quizPassed && honorChecked)) {
         if (statusEl) {
           statusEl.textContent = 'Pass the quiz AND confirm the console challenge first.';
           statusEl.className = 'quiz-status err';

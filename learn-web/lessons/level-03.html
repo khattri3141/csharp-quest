@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Level 3 — Console I/O | C# Quest</title>
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-icon">&lt;/&gt;</span>
+      <span class="brand-name">C# Quest</span>
+    </div>
+    <div class="hud">
+      <button class="btn-toggle" id="teacherToggle" title="Show teacher notes">
+        <span class="dot-led"></span><span class="label">Teacher: OFF</span>
+      </button>
+      <a href="../index.html" class="btn-ghost">&larr; Map</a>
+    </div>
+  </header>
+
+  <main class="lesson-main">
+    <div class="lesson-header">
+      <div class="lesson-crumb"><a href="../index.html">Map</a> &rsaquo; Level 03</div>
+      <h1>Console I/O</h1>
+      <p class="tagline">Read user input. Talk back to them. Convert text into numbers.</p>
+    </div>
+
+    <section class="lesson-section">
+      <h2><span class="icon">i</span> What you'll learn</h2>
+      <ul>
+        <li>How to print output with <code>Console.Write</code> and <code>Console.WriteLine</code>.</li>
+        <li>How to read a line of keyboard input with <code>Console.ReadLine()</code>.</li>
+        <li>Why <code>Console.ReadLine()</code> returns <code>string?</code> (nullable) and how to handle it.</li>
+        <li>How to convert a text string into a number with <code>int.Parse()</code> and <code>double.Parse()</code>.</li>
+        <li>What string interpolation is and why it beats concatenation.</li>
+      </ul>
+
+      <div class="teacher-only">
+        <div class="teacher-note">
+          <h4>Lesson plan (≈ 20 min)</h4>
+          <ul>
+            <li><strong>3 min</strong> — Warm-up: open <code>Interaction.cs</code> in VS Code together. Read the three TODOs aloud.</li>
+            <li><strong>5 min</strong> — Concept: the wall between typed text and numbers. Show the type table.</li>
+            <li><strong>8 min</strong> — Fill TODO #1 (Greet), then TODO #2 (DoubleIt), then TODO #3 (ReadAndGreet). Run <code>dotnet run</code> after each.</li>
+            <li><strong>4 min</strong> — Run <code>dotnet test</code>, tackle the Problems.cs LeetCode challenge, take the quiz.</li>
+          </ul>
+          <h4>Warm-up question</h4>
+          <p class="say">"If I type my age into the terminal as text, is that the same as the number 25? What if I tried to add 1 to it?"</p>
+          <p>Everything that comes in from the keyboard is a <code>string</code>. That is the fundamental I/O wall.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2><span class="icon">1</span> Printing output</h2>
+      <p>Two methods print to the terminal. The only difference is whether a newline is added at the end:</p>
+
+      <pre class="code-block"><span class="tok-type">Console</span>.<span class="tok-key">Write</span>(<span class="tok-str">"Your name: "</span>);    <span class="tok-com">// cursor stays on same line</span>
+<span class="tok-type">Console</span>.<span class="tok-key">WriteLine</span>(<span class="tok-str">"Hello!"</span>);        <span class="tok-com">// cursor moves to next line</span></pre>
+
+      <div class="callout">
+        <strong>Analogy — texting vs sending:</strong> <code>Console.Write</code> is like typing a message without pressing Send — the cursor waits on the same line for more text. <code>Console.WriteLine</code> presses Send, moving to the next line.
+      </div>
+
+      <p>You can also use <strong>string interpolation</strong> (the <code>$</code> prefix) to embed variables directly:</p>
+      <pre class="code-block"><span class="tok-type">string</span> name = <span class="tok-str">"Sam"</span>;
+<span class="tok-type">int</span> age = <span class="tok-num">25</span>;
+<span class="tok-type">Console</span>.<span class="tok-key">WriteLine</span>(<span class="tok-str">$"Hello, {name}! You are {age} years old."</span>);</pre>
+
+      <div class="teacher-only">
+        <div class="teacher-note">
+          <h4>Show the difference live</h4>
+          <p>Type both lines in a scratch file and run <code>dotnet run</code>. Have the student predict what the output looks like before running. The cursor-on-same-line effect is memorable when they see it for real.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2><span class="icon">2</span> Reading input — <code>Console.ReadLine()</code></h2>
+      <p>To read a line the user types, call <code>Console.ReadLine()</code>. It pauses the program, waits for Enter, and returns everything typed as a <code>string</code>.</p>
+
+      <pre class="code-block"><span class="tok-type">Console</span>.<span class="tok-key">Write</span>(<span class="tok-str">"Your name: "</span>);
+<span class="tok-type">string</span>? input = <span class="tok-type">Console</span>.<span class="tok-key">ReadLine</span>();   <span class="tok-com">// could be null if the stream closes</span>
+<span class="tok-type">string</span> name = input ?? <span class="tok-str">"stranger"</span>;    <span class="tok-com">// ?? gives a default if null</span>
+<span class="tok-type">Console</span>.<span class="tok-key">WriteLine</span>(<span class="tok-str">$"Hello, {name}!"</span>);</pre>
+
+      <div class="callout warn">
+        <strong>Why <code>string?</code> with a question mark?</strong> The <code>?</code> means the value can be <code>null</code>. <code>Console.ReadLine()</code> returns <code>null</code> when there is no more input (e.g., a file stream ends). The <code>??</code> operator (null-coalescing) gives a safe fallback so your program never crashes.
+      </div>
+
+      <div class="interview">
+        <strong>Interview answer:</strong> "<code>Console.ReadLine()</code> returns <code>string?</code> — a nullable string — because input can be absent when the stream is redirected or closed. You handle it with the <code>??</code> operator to provide a default value, avoiding a <code>NullReferenceException</code>."
+      </div>
+
+      <div class="teacher-only">
+        <div class="teacher-note">
+          <h4>The nullable question mark</h4>
+          <p>Don't go deep on nullability yet. Just say: "The <code>?</code> means the value <em>might be null</em>. We add <code>?? ""</code> as a safety net. We'll study nulls properly in a later level."</p>
+          <h4>Ask</h4>
+          <p class="say">"What would happen if you removed the <code>?? ""</code> and passed <code>null</code> to <code>Greet()</code>?"</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2><span class="icon">3</span> Converting text to numbers</h2>
+      <p>Everything the user types comes in as a <code>string</code>. If you need a number, you must <strong>parse</strong> it explicitly. C# will never convert silently.</p>
+
+      <pre class="code-block"><span class="tok-type">Console</span>.<span class="tok-key">Write</span>(<span class="tok-str">"Enter a number: "</span>);
+<span class="tok-type">string</span> text = <span class="tok-type">Console</span>.<span class="tok-key">ReadLine</span>() ?? <span class="tok-str">"0"</span>;
+
+<span class="tok-type">int</span>    whole   = <span class="tok-type">int</span>.<span class="tok-key">Parse</span>(text);       <span class="tok-com">// "21"  -> 21</span>
+<span class="tok-type">double</span> decimal_ = <span class="tok-type">double</span>.<span class="tok-key">Parse</span>(text);    <span class="tok-com">// "3.14" -> 3.14</span></pre>
+
+      <div class="callout">
+        <strong>Analogy — the currency exchange desk:</strong> you walk in with a piece of paper that says "42". It is just text — it cannot be added or subtracted. The <code>int.Parse()</code> desk takes your paper, verifies the number written on it, and hands you back the actual coin worth 42. Now you can do maths with it.
+      </div>
+
+      <div class="callout warn">
+        <strong>What if the text is not a valid number?</strong> <code>int.Parse("hello")</code> throws a <code>FormatException</code>. For now, trust your input. In a later level you'll learn <code>int.TryParse()</code> for safe parsing.
+      </div>
+
+      <table class="type-table">
+        <thead>
+          <tr>
+            <th>Text you have</th>
+            <th>Type you want</th>
+            <th>How to convert</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>"42"</code></td><td><code>int</code></td><td><code>int.Parse("42")</code></td></tr>
+          <tr><td><code>"3.14"</code></td><td><code>double</code></td><td><code>double.Parse("3.14")</code></td></tr>
+          <tr><td><code>"true"</code></td><td><code>bool</code></td><td><code>bool.Parse("true")</code></td></tr>
+          <tr><td><code>42</code> (int)</td><td><code>string</code></td><td><code>42.ToString()</code></td></tr>
+        </tbody>
+      </table>
+
+      <div class="teacher-only">
+        <div class="teacher-note">
+          <h4>Live crash demo</h4>
+          <p>Deliberately call <code>int.Parse("hello")</code> and let it crash. Read the exception message out loud. Normalise seeing exceptions — they are informative, not scary. Say: "This is the program telling you exactly what went wrong and where."</p>
+          <h4>Key phrase</h4>
+          <p class="say">"The keyboard always gives you text. You choose when to turn it into a number."</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2><span class="icon">4</span> Putting it all together</h2>
+      <p>Here is a complete mini-program that reads a name and a number, then responds:</p>
+
+      <pre class="code-block"><span class="tok-type">Console</span>.<span class="tok-key">Write</span>(<span class="tok-str">"Your name: "</span>);
+<span class="tok-type">string</span> name = <span class="tok-type">Console</span>.<span class="tok-key">ReadLine</span>() ?? <span class="tok-str">"stranger"</span>;
+
+<span class="tok-type">Console</span>.<span class="tok-key">Write</span>(<span class="tok-str">"Pick a whole number: "</span>);
+<span class="tok-type">string</span> text   = <span class="tok-type">Console</span>.<span class="tok-key">ReadLine</span>() ?? <span class="tok-str">"0"</span>;
+<span class="tok-type">int</span>    number = <span class="tok-type">int</span>.<span class="tok-key">Parse</span>(text);
+
+<span class="tok-type">Console</span>.<span class="tok-key">WriteLine</span>(<span class="tok-str">$"Hello, {name}! Double your number is {number * 2}."</span>);</pre>
+
+      <div class="callout">
+        <strong>Flow:</strong> prompt → wait → read string → parse → compute → print. Every console app you write follows this same loop.
+      </div>
+
+      <div class="teacher-only">
+        <div class="teacher-note">
+          <h4>Trace through it together</h4>
+          <p>Cover the code and ask the student to describe what each line does in plain English, in order. If they can narrate the code, they understand it. This is the most important comprehension check in the level.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2><span class="icon">&gt;</span> Console challenge</h2>
+      <p>Open this folder in VS Code:</p>
+      <p><span class="path-pill">practice-console/Level03-ConsoleIO/</span></p>
+      <ol class="challenge-steps">
+        <li>Open <code>Level03/Interaction.cs</code>. Fill in the three <code>TODO</code> methods.</li>
+        <li>Open <code>Level03/Problems.cs</code>. Solve the <strong>Defanging an IP Address</strong> problem (LeetCode #1108).</li>
+        <li>Run <code>dotnet run</code> inside <code>Level03/</code> and try typing a name and a number.</li>
+        <li>Run <code>dotnet test</code> from the level folder. All 7 tests should pass.</li>
+      </ol>
+      <div class="callout tip">
+        <strong>Tip:</strong> For <code>DefangIp</code>, every <code>string</code> has a <code>.Replace(oldValue, newValue)</code> method. One call is all you need.
+      </div>
+
+      <div class="teacher-only">
+        <div class="teacher-note">
+          <h4>Work the TODOs in order</h4>
+          <p>Do <code>Greet</code> together — it is just string interpolation they already know. Let them try <code>DoubleIt</code> alone: the only new skill is <code>int.Parse()</code>. <code>ReadAndGreet</code> is just combining the two.</p>
+          <h4>LeetCode bridge</h4>
+          <p>After <code>dotnet test</code> passes, open <a href="https://leetcode.com/problems/defanging-an-ip-address/" target="_blank">LeetCode #1108</a> in the browser. Have them paste the same <code>.Replace()</code> logic directly into the LeetCode editor and submit. The point: the same thinking works in any environment.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2><span class="icon">?</span> Quiz</h2>
+      <p class="dim">All correct unlocks Level 4.</p>
+      <div class="quiz" id="quizRoot"></div>
+
+      <label class="honor-row" id="honorRow" for="honorBox">
+        <input type="checkbox" id="honorBox" />
+        <span class="honor-label">
+          I ran <code>dotnet test</code> in the Level 3 folder and all 7 tests passed.
+        </span>
+      </label>
+
+      <div class="quiz-actions">
+        <button class="btn btn-secondary" id="checkQuizBtn">Check answers</button>
+        <button class="btn" id="completeBtn" disabled>Mark Level Complete</button>
+        <span class="quiz-status" id="quizStatus"></span>
+      </div>
+    </section>
+
+    <nav class="lesson-nav">
+      <a href="level-02.html" class="btn btn-secondary">&larr; Level 2</a>
+      <a href="../index.html" class="btn btn-secondary">Back to map</a>
+    </nav>
+  </main>
+
+  <script src="../assets/js/progress.js"></script>
+  <script src="../assets/js/quiz.js"></script>
+  <script>
+    initLesson({
+      levelId: 3,
+      quiz: [
+        {
+          question: 'What does <code>Console.ReadLine()</code> return?',
+          options: [
+            'An int with the number the user typed',
+            'A string? — the text the user typed, or null if the stream is closed',
+            'A char — the first character the user typed',
+            'void — it prints the input back automatically',
+          ],
+          answer: 1,
+        },
+        {
+          question: 'The user types "42" and you call <code>int.Parse("42")</code>. What is the result?',
+          options: [
+            'The string "42" — Parse does not change the type',
+            'A compile error — you cannot call Parse on a string literal',
+            'The integer 42 — Parse converts the text to a real number',
+            'A double 42.0 — Parse always returns a decimal',
+          ],
+          answer: 2,
+        },
+        {
+          question: 'What is the difference between <code>Console.Write</code> and <code>Console.WriteLine</code>?',
+          options: [
+            'Write is faster; WriteLine is safer',
+            'WriteLine adds a newline at the end; Write leaves the cursor on the same line',
+            'Write accepts variables; WriteLine only accepts string literals',
+            'There is no difference — they produce identical output',
+          ],
+          answer: 1,
+        },
+        {
+          question: 'Why does <code>Console.ReadLine()</code> return <code>string?</code> (with a <code>?</code>)?',
+          options: [
+            'Because the user might type a number instead of a word',
+            'Because it can return null when the input stream is closed or redirected',
+            'Because C# strings always need a ? to be used in interpolation',
+            'It is a typo — the correct return type is just string',
+          ],
+          answer: 1,
+        },
+      ],
+    });
+  </script>
+</body>
+</html>
