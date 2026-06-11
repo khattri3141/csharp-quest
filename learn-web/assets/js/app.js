@@ -41,7 +41,7 @@ function renderMap() {
         toast('This level is coming soon.');
         return;
       }
-      if (!unlocked) {
+      if (!unlocked && !Progress.teacherMode()) {
         toast('Finish the previous level to unlock this one.');
         return;
       }
