@@ -6,6 +6,7 @@ public static class HelloProgram
 {
     public static void Binod()
     {
+        //C:\Users\g.khattri\personal-project\csharp-quest\practice-console/Level01-HelloWorld/Level01\HelloProgram.cs
         // =================================================
         // YOUR JOB:
         //   Replace the line below with a single call to
@@ -15,6 +16,6 @@ public static class HelloProgram
         //
         //   Capital H, capital W. No quotes, no extra text.
         // =================================================
-        Console.WriteLine("hello beautiful lady japanese gir  ");
+        Console.WriteLine("Hello, World!");
     }
 }

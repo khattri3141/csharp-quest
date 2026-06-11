@@ -54,7 +54,10 @@
     <section class="lesson-section">
       <h2><span class="icon">1</span> The concept</h2>
       <p>A C# program is a set of instructions the computer follows in order. The simplest instruction is: <em>show some text on the screen</em>.</p>
-      <p class="dim"><strong>Real-world analogy:</strong> Think of <code>Console.WriteLine("Hello")</code> as you handing a sticky note that says "Hello" to a friend and asking them to read it out loud. <code>Console</code> is the friend. <code>WriteLine</code> is the action. The text in quotes is the note.</p>
+      <div class="callout">
+        <strong>Memory Palace — Station 1: The PA Speaker.</strong> You walk into your gym. Right by the entrance, mounted on the wall, is the <strong>PA speaker</strong>. The trainer grabs the mic, leans in, and shouts one sentence so the whole floor hears it. Picture it: the squeal of feedback, then the booming voice. <br><br>
+        <em>Bind it:</em> <code>Console</code> = the PA system. <code>WriteLine</code> = the trainer shouting one full line into the mic. <code>"Hello, World!"</code> = the exact words shouted. The semicolon = the trainer letting go of the mic button. Every time you write <code>Console.WriteLine(...)</code> from now on, mentally hear that shout at Station 1.
+      </div>
       <p>Here is the smallest C# program possible (.NET 8 style):</p>
 <pre class="code-block"><span class="tok-com">// Program.cs</span>
 <span class="tok-type">Console</span>.<span class="tok-key">WriteLine</span>(<span class="tok-str">"Hello, World!"</span>);</pre>

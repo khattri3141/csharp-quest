@@ -13,7 +13,7 @@ public static class Variables
     // The return type is int, so the value must be a whole number.
     public static int GetMyAge()
     {
-        return 0; // change me
+        return 25; // change me
     }
 
     // TODO #2
@@ -21,7 +21,7 @@ public static class Variables
     // The return type is string, so use double quotes around the value.
     public static string GetMyName()
     {
-        return ""; // change me
+        return "abinash"; // change me
     }
 
     // TODO #3
@@ -29,7 +29,7 @@ public static class Variables
     // The return type is bool, so the answer is just true or false.
     public static bool LikesCoffee()
     {
-        return false; // change me
+        return true; // change me
     }
 
     // TODO #4
@@ -37,7 +37,7 @@ public static class Variables
     // The return type is double, so a decimal value is allowed.
     public static double GetPrice()
     {
-        return 0.0; // change me
+        return 19.99; // change me
     }
 
     // TODO #5
@@ -54,6 +54,6 @@ public static class Variables
     // Hint: use a $-prefixed string and put the variables in braces.
     public static string BuildGreeting(string name, int age)
     {
-        return ""; // change me
+        return $"Hello {name}, you are {age}.";
     }
 }
