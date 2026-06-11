@@ -5,6 +5,7 @@ namespace Level01;
 public static class HelloProgram
 {
     public static void Run()
+//C:\Users\USER\OneDrive\Documents\GitHub\csharp-quest/practice-console/Level01-HelloWorld/Level01
     {
         //C:\Users\g.khattri\personal-project\csharp-quest\practice-console/Level01-HelloWorld/Level01\HelloProgram.cs
         // =================================================
@@ -16,6 +17,7 @@ public static class HelloProgram
         //
         //   Capital H, capital W. No quotes, no extra text.
         // =================================================
-        Console.WriteLine("Hello, World!");
+        Console.WriteLine("wellcome to the world of programming lets start with the basics");
+    
     }
 }
